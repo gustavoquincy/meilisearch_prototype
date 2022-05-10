@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-meilisearch-sdk = "0.16"
+meilisearch-sdk = "0.17.0"
 # futures: because we want to block on futures
 futures = "0.3"
 # serde: required if you are going to use documents
