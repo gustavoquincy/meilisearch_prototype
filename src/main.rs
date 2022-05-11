@@ -1,15 +1,3 @@
-/*
-#[derive(Serialize, Deserialize)]
-struct Movie {
-    id: String,
-    title: String,
-    poster: String,
-    overview: String,
-    release_date: i64,
-    genres: Vec<String>,
-}
-*/
-
 #[derive(Serialize, Deserialize)]
 struct Movie {
     id: String,
