@@ -1,3 +1,4 @@
+/*
 #[derive(Serialize, Deserialize)]
 struct Movie {
     id: String,
@@ -6,6 +7,14 @@ struct Movie {
     overview: String,
     release_date: i64,
     genres: Vec<String>,
+}
+*/
+
+#[derive(Serialize, Deserialize)]
+struct Movie {
+    id: String,
+    #[serde(flatten)]
+    value: serde_json::Value,
 }
 
 use meilisearch_sdk::{
@@ -29,4 +38,7 @@ fn main() { block_on(async move {
 
     // adding documents
     client.index("movies").add_documents(&moives_docs, None).await.unwrap();
+
+    // use `uid` to check the status of the documents
+    // client.index("movies").get_task(0).await.unwrap();
 })}
