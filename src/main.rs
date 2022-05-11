@@ -29,6 +29,7 @@ use futures::executor::block_on;
 
 fn main() { block_on(async move {
     let client = Client::new("http://localhost:7700", "masterKey");
+    let movies = client.index("index");
 
     // reading and parsing the file
     let mut file = File::open("movies.json").unwrap();
@@ -39,6 +40,12 @@ fn main() { block_on(async move {
     // adding documents
     client.index("movies").add_documents(&moives_docs, None).await.unwrap();
 
-    // use `uid` to check the status of the documents
-    // client.index("movies").get_task(0).await.unwrap();
+    // build a query ann execute it later
+    let query: Query = Query::new(&movies)
+    .with_query("batman")
+    .build();
+
+    let results: SearchResults<Movie> = client.index("movies").execute_query(&query).await.unwrap();
+
+    println!("{:?}", results);
 })}
