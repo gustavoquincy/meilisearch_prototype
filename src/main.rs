@@ -33,7 +33,11 @@ fn main() { block_on(async move {
     .with_query("batman")
     .build();
 
-    let results: SearchResults<Movie> = client.index("movies").execute_query(&query).await.unwrap();
+    // let results: SearchResults<Movie> = client.index("movies").execute_query(&query).await.unwrap();
+    let mut synonyms = std::collections::HashMap::new();
+    synonyms.insert(String::from("winnie"), vec![String::from("piglet")]);
+    synonyms.insert(String::from("piglet"), vec![String::from("winnie")]);
 
-    println!("{:?}", results);
+    client.index("movies").set_synonyms(&synonyms).await.unwrap();
+    // println!("{:?}", results);
 })}
